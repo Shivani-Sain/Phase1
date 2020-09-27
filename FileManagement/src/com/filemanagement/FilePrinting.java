@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class FilePrinting {
 	public File[] getFiles() { 
-	File path = new File("Files/");
+	File path = new File("root/");
 	File file1[] = null;
 	if(path.isDirectory()) {
 		file1 = path.listFiles(); 
@@ -19,10 +19,12 @@ public class FilePrinting {
 		Scanner s = new Scanner(System.in);
 		System.out.println("enter the file name");
 		String fileName = s.next();
-		File file = new File("Files/"+fileName+".txt");
+		File file = new File("root/"+fileName+".txt");
 		try {
 			if(file.createNewFile()) {
 			System.out.println("file is created");
+			}else{
+				System.out.println("file already exist");
 			}
 					} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -33,7 +35,7 @@ public class FilePrinting {
 		Scanner s= new Scanner(System.in);
 		System.out.println("enter the name of the file which is to be deleted");
 		String str = s.next();
-		File f = new File("Files/"+str+".txt");
+		File f = new File("root/"+str+".txt");
 		if(f.delete()) {
 			System.out.println("File is deleted");
 		}else {
@@ -42,17 +44,24 @@ public class FilePrinting {
 	}
 	public void searchFile() {
 		Scanner s = new Scanner(System.in);
+		int count=0; 
 		System.out.println("enter file name which is to searched");
 		String fileName = s.next();  
-		File f = new File("Files/");
+		File f = new File("root/");
 		if(f.isDirectory()) {
 			File[] fileList = f.listFiles();
 			for(File file : fileList) {
 				if(file.getName().equals(fileName+".txt")) {
-					System.out.println("File found with name : "+file.getName());
+					count++;
+					break;
 				}else {
-					System.out.println("File doesn't exist");
+					count = 0;
 				}
+			}
+			if(count > 0){
+				System.out.println(fileName+".txt");
+			}else{
+				System.out.println("File not found");
 			}
 		}
 	}
