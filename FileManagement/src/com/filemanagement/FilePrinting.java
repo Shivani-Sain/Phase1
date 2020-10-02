@@ -1,6 +1,8 @@
 package com.filemanagement;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -18,17 +20,26 @@ public class FilePrinting {
 	public void createFile() {
 		Scanner s = new Scanner(System.in);
 		System.out.println("enter the file name");
-		String fileName = s.next();
-		File file = new File("root/"+fileName+".txt");
 		try {
+			do{
+				String fileName = s.next();
+			File file = new File("root/"+fileName+".txt");
 			if(file.createNewFile()) {
-			System.out.println("file is created");
+				 FileOutputStream outputStream = new FileOutputStream(file);
+				System.out.println("enter the content of the file");
+				Scanner sp = new Scanner(System.in);
+				String s1 = sp.nextLine();
+				byte[] bytes = s1.getBytes(); 
+				outputStream.write(bytes);
+				outputStream.close();
+				System.out.println("file is created");
+			break;
 			}else{
-				System.out.println("file already exist");
+				System.out.println("file already exist Please enter a new file name");
 			}
+			}while(true);
 					} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+					e.printStackTrace();
 		}
 	}
 	public void deleteFie() {
