@@ -57,7 +57,7 @@ public class WelcomePage {
 			switch(str1) {
 			case 1 :System.out.println("adding files");
 			new FilePrinting().createFile();
-				break ;
+			break ;
 			case 2 :System.out.println("deleting files");
 			new FilePrinting().deleteFie();
 			break;
